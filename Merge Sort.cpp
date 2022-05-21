@@ -9,6 +9,7 @@ void merge(int a[],int f,int mid,int l)
         t1[i]=a[i+f];
     for(int i=0;i<n2;i++)
         t2[i]=a[mid+1+i];
+    int i=0,j=0;
     while(i<n1 && j<n2)
     {
         if(t1[i]<=t2[j])
@@ -16,11 +17,12 @@ void merge(int a[],int f,int mid,int l)
         else
             c[k++]=t2[j++];
     }
-        while(i<n1)
-            c[k++]=t1[i++];
-        while(j<n2)
-            c[k++]=t2[j++];
-
+    while(i<n1)
+        c[k++]=t1[i++];
+    while(j<n2)
+        c[k++]=t2[j++];
+    for(i=0;i<=l;i++)
+        a[i]=c[i];
 }
 void mergesort(int a[],int f,int l)
 {   

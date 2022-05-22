@@ -9,7 +9,7 @@ void merge(int a[],int f,int mid,int l)
         t1[i]=a[i+f];
     for(int i=0;i<n2;i++)
         t2[i]=a[mid+1+i];
-    int i=0,j=0;
+    i=0,j=0;
     while(i<n1 && j<n2)
     {
         if(t1[i]<=t2[j])
@@ -36,8 +36,8 @@ void mergesort(int a[],int f,int l)
 }
 int main()
 {
-    int a[]={4,3,2,1};
-    mergesort(a,0,3);
-    for(int i=0;i<4;i++)
+    int a[]={4,3,2,1,8,6,4};
+    mergesort(a,0,7);
+    for(int i=0;i<8;i++)
         cout<<a[i];   
 }

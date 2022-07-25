@@ -1,47 +1,50 @@
+//djikstras
 #include<iostream>
 using namespace std;
 int v;
-int select_min_vertex(bool selected[],int value[])
-{
-    int minn=999,vertex;
-    for(int i=0;i<v;i++)
-    
-        if(selected[i]==false && value[i]<=minn)
-        {
-            minn=value[i];
-            vertex=i;
-        }
-    
-    return vertex;
-}
+int G[9][9],value[9];
+bool selected[9];
 int main()
 {
-    int u;
+    int u,i,j,count=0,ver,minn;
     cout<<"Enter number of vertices:-";
     cin>>v;
-    int G[v][v],i,j,value[v];
-    bool selected[v];
-    for(i=0;i<v;i++)
+    for(i=1;i<=v;i++)
         selected[i]=false,value[i]=999;
     cout<<"Enter adjacency matrix:-";
-    for(i=0;i<v;i++)
-        for(j=0;j<v;j++)
+    for(i=1;i<=v;i++)
+        for(j=1;j<=v;j++)
+        {    
             cin>>G[i][j];
-    value[0]=0;
-    for(i=0;i<v-1;i++)
+            if(G[i][j]==0)
+                G[i][j]=999;
+        } 
+    cout<<"Enter starting vertex:-";
+    cin>>ver;  
+    for(i=1;i<=v;i++)
     {
-        u=select_min_vertex(selected,value);
-        selected[u]=true;
-        for(j=0;j<v;j++)
-        {
-            if(!selected[j] && G[u][j] && value[u]!=999 && value[u]+G[u][j]<value[j])
+        selected[i]=0;
+        value[i]=G[ver][i];
+    }
+    value[ver]=0;
+    selected[ver]=true;
+    while(count<v)
+    {
+        minn=999;
+        for(i=1;i<=v;i++)
+            if(value[i]<minn && selected[i]==0)
             {
-                value[j]=value[u]+G[u][j];
+                minn=value[i];
+                ver=i;
             }
-        }
+        selected[ver]=true;
+        for(i=1;i<=v;i++)
+            if(value[i]>value[ver]+G[ver][i])
+                value[i]=value[ver]+G[ver][i];
+        count++;
     }
     cout<<"Vertex \tDistance from source\n";
-    for(i=0;i<v;i++)
+    for(i=1;i<=v;i++)
         cout<<i<<"\t"<<value[i]<<"\n";
     return 0;
 }

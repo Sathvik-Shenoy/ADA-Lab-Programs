@@ -1,58 +1,41 @@
+//Topological sort
 #include<iostream>
 using namespace std;
-
-int main(){
-
-int i,j,k,n,a[10][10],indeg[10],flag[10],count=0; 
-
-cout<<"Enter the no of vertices:\n";
-
-cin>>n;
-
-cout<<"Enter the adjacency matrix:\n";
-
-for(i=0;i<n;i++){
-
-for(j=0;j<n;j++)
-
-cin>>a[i][j];
-
-}
-
-for(i=0;i<n;i++){
-
-        indeg[i]=0;
-
-        flag[i]=0;   } 
-
-    for(i=0;i<n;i++)
-
-        for(j=0;j<n;j++)
-
-            indeg[i]=indeg[i]+a[j][i]; 
-
-    cout<<"\nThe topological order is:"; 
-
-    while(count<n){
-
-        for(k=0;k<n;k++){
-
-            if((indeg[k]==0) && (flag[k]==0)){
-
-                cout<<k+1<<" ";
-
-                flag [k]=1;
-
+int main()
+{
+    int v;
+    cout<<"Enter number of vertices:-";
+    cin>>v;
+    int G[v][v],selected[v],indeg[v],count=0,i,j;
+    cout<<"Enter adjacency matrix:-";
+    for(int i=1;i<=v;i++)
+        for(int j=1;j<=v;j++)
+        {
+            cin>>G[i][j];
+        }
+    for(int i=1;i<=v;i++)
+        selected[i]=0, indeg[i]=0;
+    for(int i=1;i<=v;i++)
+        for(int j=1;j<=v;j++)
+            if(G[j][i]==1)
+                indeg[i]+=1;
+    while(count<v)
+    {
+        for(i=1;i<=v;i++)
+        {
+            if(indeg[i]==0 && selected[i]==0)
+            {   
+                cout<<i<<"\t";
+                selected[i]=1;
             }
-
-            for(i=0;i<n;i++){
-
-                if(a[i][k]==1)
-
-                    indeg[k]--;
-
-            }    }
-
-     count++;
-
-    }   return 0;}
+            else{
+            for(j=1;j<=v;j++)
+            {
+                if(G[j][i]==1)
+                    indeg[i]--;
+            }}
+        }
+        count++;
+    }
+    return 0;
+}

@@ -49,7 +49,7 @@ int main()
         else
         {
             cout<<i<<" ";
-            j=j-p[i];
+            j=j-wt[i];
             i--;
         }
     }
